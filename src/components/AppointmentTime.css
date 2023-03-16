@@ -1,0 +1,32 @@
+.ButtonGroup {
+  display: block;
+}
+
+.ButtonGroup .TimeButton:last-child {
+  margin-right: 0;
+}
+
+.TimeButton {
+  width: 140px;
+  padding: 8px;
+  border-radius: 0.375rem;
+  text-align: center;
+  cursor: pointer;
+  height: 40px;
+  color: #0d6efd;
+  border: 1px solid #0d6efd;
+  margin-right: 4px;
+  margin-top: 4px;
+  background-color: transparent;
+}
+
+.Selected {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.TimeButton:hover,
+:focus {
+  border-width: 2px;
+  border-color: var(--primary-color, rgb(0, 105, 255));
+}

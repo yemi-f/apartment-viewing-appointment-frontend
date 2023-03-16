@@ -1,0 +1,18 @@
+.NavBar {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.NavLink {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.Active {
+  background-color: #04aa6d;
+}
