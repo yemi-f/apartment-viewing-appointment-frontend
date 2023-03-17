@@ -1,0 +1,48 @@
+.FormContainer {
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#login-button {
+  display: block;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  height: 40px;
+  background-color: #0d6efd;
+  border: 1px solid #0d6efd;
+  color: #fff;
+  width: 100%;
+}
+
+.LoginInput {
+  font-size: 1rem;
+  border-radius: 0.375rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.InputContainer {
+  width: 100%;
+  margin-top: 8px;
+}
+
+#username,
+#password {
+  padding: 0.375rem 0.75rem;
+  line-height: 1.5;
+  color: #212529;
+  border: 1px solid #dee2e6;
+  margin: 0;
+  appearance: none;
+}
+
+#login-button:hover:enabled {
+  background-color: #0b5ed7;
+}
+
+#login-button:disabled {
+  opacity: 0.65;
+  cursor: default;
+}

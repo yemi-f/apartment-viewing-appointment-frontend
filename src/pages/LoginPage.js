@@ -1,19 +1,42 @@
 import React from "react";
 import { useAuth } from "../context/AuthProvider";
+import "./LoginPage.css";
 
 export const LoginPage = () => {
   const { handleLogin } = useAuth();
+
   return (
-    <div>
+    <div className="LoginContainer">
       <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="username">Email: </label>
-        <input type="text" id="username" name="username" required />
-        <br />
-        <label htmlFor="password">Password: </label>
-        <input type="password" id="password" name="password" required />
-        <br />
-        <input type="submit" value="Login" className="LoginButton" />
+      <form className="FormContainer" onSubmit={handleLogin}>
+        <div className="InputContainer">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            className="LoginInput"
+            required
+          />
+        </div>
+        <div className="InputContainer">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            className="LoginInput"
+            required
+          />
+        </div>
+        <div className="InputContainer">
+          <input
+            type="submit"
+            value="Login"
+            id="login-button"
+            className="LoginInput"
+          />
+        </div>
       </form>
     </div>
   );
