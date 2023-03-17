@@ -1,5 +1,4 @@
-.SubmitButton {
-  /* width: 140px; */
+#book-appointment-button {
   padding: 8px;
   border-radius: 0.375rem;
   text-align: center;
@@ -8,15 +7,34 @@
   background-color: #0d6efd;
   border: 1px solid #0d6efd;
   color: #fff;
-  margin-top: 4px;
-  margin-bottom: 4px;
 }
 
-.SubmitButton:hover:enabled {
+#book-appointment-button:hover:enabled {
   background-color: #0b5ed7;
 }
 
-.SubmitButton:disabled {
+#book-appointment-button:disabled {
   opacity: 0.65;
   cursor: default;
+}
+
+#name,
+#email {
+  padding: 0.375rem 0.75rem;
+  line-height: 1.5;
+  color: #212529;
+  border: 1px solid #dee2e6;
+  margin: 0;
+  appearance: none;
+}
+
+.AppointmentInput {
+  font-size: 1rem;
+  border-radius: 0.375rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.AppointmentInputContainer {
+  margin-top: 8px;
 }

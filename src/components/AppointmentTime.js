@@ -7,17 +7,19 @@ export const AppointmentTime = ({
   selectedTime,
 }) => {
   return (
-    <div className="ButtonGroup">
-      <p>Available times:</p>
-      {availableTimes.map((time) => (
-        <button
-          className={`TimeButton ${selectedTime === time ? "Selected" : ""}`}
-          key={time}
-          onClick={() => handleTimeButtonClick(time)}
-        >
-          {time}
-        </button>
-      ))}
+    <div className="AppointmentTimeWrapper">
+      <label>Available times</label>
+      <div>
+        {availableTimes.map((time) => (
+          <button
+            className={`TimeButton ${selectedTime === time ? "Selected" : ""}`}
+            key={time}
+            onClick={() => handleTimeButtonClick(time)}
+          >
+            {time}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

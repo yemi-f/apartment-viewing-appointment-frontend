@@ -18,19 +18,36 @@ export const AppointmentForm = ({ date, time, buildingId }) => {
   return (
     <>
       <h3>This is a form</h3>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name: </label>
-        <input type="text" id="name" name="name" required />
-        <br />
-        <label htmlFor="email">Email: </label>
-        <input type="email" id="email" name="email" required />
-        <br />
-        <input
-          type="submit"
-          value="Book appointment"
-          disabled={!time}
-          className="SubmitButton"
-        />
+      <form onSubmit={handleSubmit} className="AppointmentFormWrapper">
+        <div className="AppointmentInputContainer">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            className="AppointmentInput"
+            required
+          />
+        </div>
+        <div className="AppointmentInputContainer">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            className="AppointmentInput"
+            required
+          />
+        </div>
+        <div className="AppointmentInputContainer">
+          <input
+            type="submit"
+            value="Book appointment"
+            disabled={!time}
+            id="book-appointment-button"
+            className="AppointmentInput"
+          />
+        </div>
       </form>
     </>
   );

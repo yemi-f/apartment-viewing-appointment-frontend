@@ -1,4 +1,5 @@
 import React from "react";
+import "./AppointmentCalendar.css";
 
 export const AppointmentCalendar = ({
   selectedDate,
@@ -8,8 +9,9 @@ export const AppointmentCalendar = ({
 }) => {
   return (
     <>
-      <div>
-        <label htmlFor="cal">Appointment date:</label>
+      <div className="AppointmentCalendarWrapper">
+        <label htmlFor="cal">Appointment date</label>
+        <br />
         <input
           type="date"
           id="cal"

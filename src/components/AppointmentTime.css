@@ -1,8 +1,9 @@
-.ButtonGroup {
+.AppointmentTimeWrapper {
   display: block;
+  margin: 8px 0;
 }
 
-.ButtonGroup .TimeButton:last-child {
+.AppointmentTimeWrapper .TimeButton:last-child {
   margin-right: 0;
 }
 

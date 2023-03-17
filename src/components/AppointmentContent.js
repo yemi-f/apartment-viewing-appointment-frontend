@@ -64,45 +64,50 @@ export const AppointmentContent = () => {
   };
 
   return (
-    <>
+    <div className="AppointmentContentWrapper">
       <div>
-        <label htmlFor="buildings">Choose a building:</label>
-        <select
-          name="buildings"
-          id="buildings"
-          onChange={handleBuildingSelectChange}
-        >
-          <option value="">Please select a building</option>
-          {buildings.map(({ name, id }) => (
-            <option key={id} value={id}>
-              {name}
-            </option>
-          ))}
-        </select>
+        <div className="SelectBuildingWrapper">
+          <label htmlFor="buildings">Choose a building</label>
+          <br />
+          <select
+            name="buildings"
+            id="buildings"
+            onChange={handleBuildingSelectChange}
+          >
+            <option value="">Please select a building</option>
+            {buildings.map(({ name, id }) => (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <AppointmentCalendar
+          disabled={availableTimes.length < 1}
+          today={today}
+          selectedDate={selectedDate}
+          handleCalendarOnChange={handleCalendarOnChange}
+        />
       </div>
 
-      <AppointmentCalendar
-        disabled={availableTimes.length < 1}
-        today={today}
-        selectedDate={selectedDate}
-        handleCalendarOnChange={handleCalendarOnChange}
-      />
+      <div>
+        {availableTimes.length > 0 && (
+          <>
+            <AppointmentTime
+              availableTimes={availableTimes}
+              selectedTime={selectedTime}
+              handleTimeButtonClick={handleTimeButtonClick}
+            />
 
-      {availableTimes.length > 0 && (
-        <>
-          <AppointmentTime
-            availableTimes={availableTimes}
-            selectedTime={selectedTime}
-            handleTimeButtonClick={handleTimeButtonClick}
-          />
-
-          <AppointmentForm
-            time={selectedTime}
-            date={selectedDate}
-            buildingId={selectedBuildingId}
-          />
-        </>
-      )}
-    </>
+            <AppointmentForm
+              time={selectedTime}
+              date={selectedDate}
+              buildingId={selectedBuildingId}
+            />
+          </>
+        )}
+      </div>
+    </div>
   );
 };
