@@ -12,6 +12,10 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("username")) || null
   );
 
+  const [authorization, setAuthorization] = useState(
+    JSON.parse(localStorage.getItem("authorization")) || null
+  );
+
   let navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -28,9 +32,16 @@ export const AuthProvider = ({ children }) => {
         ).toString("base64")}`,
       }),
     })
-      .then((response) => response.text())
-      .then(() => {
+      .then((response) => {
+        const authAuthorization = response.text();
+        return authAuthorization;
+      })
+      .then((authorization) => {
         setUsername(user.username);
+        setAuthorization(authorization);
+        localStorage.setItem("authorization", JSON.stringify(authorization));
+        console.log(authorization);
+
         localStorage.setItem("username", JSON.stringify(user.username));
         navigate("/admin");
       })
@@ -44,6 +55,7 @@ export const AuthProvider = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem("username");
     setUsername(null);
+    setAuthorization(null);
     navigate("/");
   };
 
@@ -52,6 +64,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         isAuthenticated: isAuthenticated(),
         username,
+        authorization,
         handleLogin,
         handleLogout,
       }}
