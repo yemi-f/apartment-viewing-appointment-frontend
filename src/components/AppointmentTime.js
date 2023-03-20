@@ -8,7 +8,7 @@ export const AppointmentTime = ({
 }) => {
   return (
     <div className="AppointmentTimeWrapper">
-      <label>Available times</label>
+      <h4 className="TimeLabel">Select a time</h4>
       <div>
         {availableTimes.map((time) => (
           <button

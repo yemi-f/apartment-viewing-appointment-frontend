@@ -1,8 +1,10 @@
 import React from "react";
 import "./AppointmentForm.css";
 
+const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
+
 export const AppointmentForm = ({ date, time, buildingId }) => {
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
       name: e.target.elements.name.value,
@@ -12,12 +14,25 @@ export const AppointmentForm = ({ date, time, buildingId }) => {
       time,
     };
 
-    console.log(body);
+    await fetch(`${apiServerUrl}/appointments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        e.target.reset();
+      })
+      .catch((error) => {
+        console.error({ error });
+      });
   };
 
   return (
     <>
-      <h3>This is a form</h3>
+      <h4 className="FormLabel">Enter your details below</h4>
       <form onSubmit={handleSubmit} className="AppointmentFormWrapper">
         <div className="AppointmentInputContainer">
           <input

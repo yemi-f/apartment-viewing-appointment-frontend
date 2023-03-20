@@ -10,8 +10,7 @@ export const AppointmentCalendar = ({
   return (
     <>
       <div className="AppointmentCalendarWrapper">
-        <label htmlFor="cal">Appointment date</label>
-        <br />
+        <h4 className="DateLabel">Select a date</h4>
         <input
           type="date"
           id="cal"

@@ -3,6 +3,12 @@
   margin: 8px 0;
 }
 
+.TimeLabel {
+  margin: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 .AppointmentTimeWrapper .TimeButton:last-child {
   margin-right: 0;
 }

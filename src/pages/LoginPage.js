@@ -7,7 +7,6 @@ export const LoginPage = () => {
 
   return (
     <div className="LoginContainer">
-      <h1>Login</h1>
       <form className="FormContainer" onSubmit={handleLogin}>
         <div className="InputContainer">
           <input

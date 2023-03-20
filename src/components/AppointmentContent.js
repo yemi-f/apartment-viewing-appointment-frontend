@@ -67,8 +67,7 @@ export const AppointmentContent = () => {
     <div className="AppointmentContentWrapper">
       <div>
         <div className="SelectBuildingWrapper">
-          <label htmlFor="buildings">Choose a building</label>
-          <br />
+          <h4 className="BuildingLabel">Choose a building</h4>
           <select
             name="buildings"
             id="buildings"
