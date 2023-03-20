@@ -2,17 +2,39 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
+  height: 56px;
 }
 
 .NavLink {
   float: left;
   display: block;
-  color: black;
+  color: #1a1a1a;
   text-align: center;
-  padding: 16px;
+  margin: 4px 16px;
   text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 8px;
 }
 
-.Active {
-  background-color: #04aa6d;
+.NavBar .NavLink:first-child {
+  margin-left: 0;
+}
+
+.NavLink::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #1a1a1a;
+  transition: width 0.3s;
+  margin-top: 7px;
+  height: 2px;
+}
+
+.NavLink:hover::after {
+  width: 100%;
+}
+
+.Active::after {
+  width: 100%;
 }
