@@ -6,6 +6,7 @@ import { LoginPage } from "./pages/LoginPage";
 import { AdminPage } from "./pages/AdminPage";
 import { NavBar } from "./components/NavBar";
 import { RequireAuth } from "./components/RequireAuth";
+import { AppointmentSuccessPage } from "./pages/AppointmentSuccessPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           }
         />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/success" element={<AppointmentSuccessPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

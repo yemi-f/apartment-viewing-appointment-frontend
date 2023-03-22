@@ -1,9 +1,12 @@
 import React from "react";
 import "./AppointmentForm.css";
+import { useNavigate } from "react-router-dom";
 
 const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
 
-export const AppointmentForm = ({ date, time, buildingId }) => {
+export const AppointmentForm = ({ date, time, buildingId, buildingName }) => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
@@ -24,6 +27,8 @@ export const AppointmentForm = ({ date, time, buildingId }) => {
       .then((response) => response.json())
       .then(() => {
         e.target.reset();
+
+        navigate("/success", { state: { date, time, buildingName } });
       })
       .catch((error) => {
         console.error({ error });

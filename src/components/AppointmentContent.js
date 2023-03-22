@@ -16,15 +16,17 @@ export const AppointmentContent = () => {
   const [selectedDate, setSelectedDate] = useState(today);
   const [buildings, setBuildings] = useState([]);
   const [selectedBuildingId, setSelectedBuildingId] = useState("");
+  const [selectedBuildingName, setSelectedBuildingName] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
 
   const [availableTimes, setAvailableTimes] = useState([]);
 
   const handleBuildingSelectChange = (e) => {
     const buildingId = e.target.value;
+    const buildingName = e.target.options[e.target.selectedIndex].text;
 
-    console.log(buildingId);
     setSelectedBuildingId(buildingId);
+    setSelectedBuildingName(buildingName);
     setSelectedTime("");
   };
 
@@ -71,6 +73,7 @@ export const AppointmentContent = () => {
           <select
             name="buildings"
             id="buildings"
+            value={selectedBuildingId}
             onChange={handleBuildingSelectChange}
           >
             <option value="">Please select a building</option>
@@ -82,12 +85,14 @@ export const AppointmentContent = () => {
           </select>
         </div>
 
-        <AppointmentCalendar
-          disabled={availableTimes.length < 1}
-          today={today}
-          selectedDate={selectedDate}
-          handleCalendarOnChange={handleCalendarOnChange}
-        />
+        {selectedBuildingId && (
+          <AppointmentCalendar
+            disabled={availableTimes.length < 1}
+            today={today}
+            selectedDate={selectedDate}
+            handleCalendarOnChange={handleCalendarOnChange}
+          />
+        )}
       </div>
 
       <div>
@@ -103,6 +108,7 @@ export const AppointmentContent = () => {
               time={selectedTime}
               date={selectedDate}
               buildingId={selectedBuildingId}
+              buildingName={selectedBuildingName}
             />
           </>
         )}
