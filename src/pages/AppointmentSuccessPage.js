@@ -16,8 +16,7 @@ export const AppointmentSuccessPage = () => {
     <div className="AppointmentSuccessWrapper">
       <h3>&#x2705;</h3>
       <span>
-        Your appointment with {buildingName} at {time} on{" "}
-        {new Date(date).toDateString()} is scheduled
+        Your appointment with {buildingName} at {time} on {date} is scheduled
       </span>
     </div>
   );
