@@ -16,10 +16,14 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("authorization")) || null
   );
 
+  const [isError, setIsError] = useState(false);
+
   let navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setIsError(false);
+
     const user = {
       username: e.target.elements.username.value,
       password: e.target.elements.password.value,
@@ -33,6 +37,10 @@ export const AuthProvider = ({ children }) => {
       }),
     })
       .then((response) => {
+        if (response.status === 401) {
+          throw new Error("Unauthorized");
+        }
+
         const authAuthorization = response.text();
         return authAuthorization;
       })
@@ -40,12 +48,14 @@ export const AuthProvider = ({ children }) => {
         setUsername(user.username);
         setAuthorization(authorization);
         localStorage.setItem("authorization", JSON.stringify(authorization));
-        console.log(authorization);
 
         localStorage.setItem("username", JSON.stringify(user.username));
         navigate("/admin");
       })
-      .catch((err) => console.log({ err }));
+      .catch((err) => {
+        console.log({ err });
+        setIsError(true);
+      });
   };
 
   const isAuthenticated = () => {
@@ -56,6 +66,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("username");
     setUsername(null);
     setAuthorization(null);
+    setIsError(false);
     navigate("/");
   };
 
@@ -67,6 +78,7 @@ export const AuthProvider = ({ children }) => {
         authorization,
         handleLogin,
         handleLogout,
+        isError,
       }}
     >
       {children}

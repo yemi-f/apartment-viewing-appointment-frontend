@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthProvider";
 import "./LoginPage.css";
 
 export const LoginPage = () => {
-  const { handleLogin } = useAuth();
+  const { handleLogin, isError } = useAuth();
+  const [showErrorMsg, setShowErrorMsg] = useState(false);
+
+  useEffect(() => {
+    if (isError) {
+      setShowErrorMsg(true);
+
+      setTimeout(function () {
+        setShowErrorMsg(false);
+      }, 3000);
+    }
+  }, [isError]);
 
   return (
     <div className="LoginContainer">
@@ -36,6 +47,7 @@ export const LoginPage = () => {
             className="LoginInput"
           />
         </div>
+        {showErrorMsg && <p>&#x274C; Invalid username and/or password.</p>}
       </form>
     </div>
   );
