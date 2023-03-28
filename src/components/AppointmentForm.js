@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AppointmentForm.css";
 import { useNavigate } from "react-router-dom";
 
@@ -6,6 +6,7 @@ const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
 
 export const AppointmentForm = ({ date, time, buildingId, buildingName }) => {
   const navigate = useNavigate();
+  const [showErrorMsg, setShowErrorMsg] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +33,10 @@ export const AppointmentForm = ({ date, time, buildingId, buildingName }) => {
       })
       .catch((error) => {
         console.error({ error });
+        setShowErrorMsg(true);
+        setTimeout(function () {
+          setShowErrorMsg(false);
+        }, 3000);
       });
   };
 
@@ -69,6 +74,9 @@ export const AppointmentForm = ({ date, time, buildingId, buildingName }) => {
           />
         </div>
       </form>
+      {showErrorMsg && (
+        <p>&#x274C; Appointment could not be booked. Please try again.</p>
+      )}
     </>
   );
 };
