@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../context/AuthProvider";
 import "./LoginPage.css";
 
@@ -6,19 +6,19 @@ export const LoginPage = () => {
   const { handleLogin, isError } = useAuth();
   const [showErrorMsg, setShowErrorMsg] = useState(false);
 
-  useEffect(() => {
+  const onSubmit = (e) => {
+    handleLogin(e);
     if (isError) {
       setShowErrorMsg(true);
-
       setTimeout(function () {
         setShowErrorMsg(false);
       }, 3000);
     }
-  }, [isError]);
+  };
 
   return (
     <div className="LoginContainer">
-      <form className="FormContainer" onSubmit={handleLogin}>
+      <form className="FormContainer" onSubmit={onSubmit}>
         <div className="InputContainer">
           <input
             type="text"
@@ -47,7 +47,9 @@ export const LoginPage = () => {
             className="LoginInput"
           />
         </div>
-        {showErrorMsg && <p>&#x274C; Invalid username and/or password.</p>}
+        {isError && showErrorMsg && (
+          <p>&#x274C; Invalid username and/or password.</p>
+        )}
       </form>
     </div>
   );
