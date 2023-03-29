@@ -16,46 +16,35 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("authorization")) || null
   );
 
-  const [isError, setIsError] = useState(false);
-
   let navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setIsError(false);
 
     const user = {
       username: e.target.elements.username.value,
       password: e.target.elements.password.value,
     };
 
-    fetch(`${apiServerUrl}/login`, {
+    const response = await fetch(`${apiServerUrl}/login`, {
       headers: new Headers({
         Authorization: `Basic ${Buffer.from(
           `${user.username}:${user.password}`
         ).toString("base64")}`,
       }),
-    })
-      .then((response) => {
-        if (response.status === 401) {
-          throw new Error("Unauthorized");
-        }
+    });
 
-        const authAuthorization = response.text();
-        return authAuthorization;
-      })
-      .then((authorization) => {
-        setUsername(user.username);
-        setAuthorization(authorization);
-        localStorage.setItem("authorization", JSON.stringify(authorization));
+    if (response.status === 401) {
+      throw new Error("Unauthorized");
+    }
 
-        localStorage.setItem("username", JSON.stringify(user.username));
-        navigate("/admin");
-      })
-      .catch((err) => {
-        console.log({ err });
-        setIsError(true);
-      });
+    const authorization = await response.text();
+
+    setUsername(user.username);
+    setAuthorization(authorization);
+    localStorage.setItem("authorization", JSON.stringify(authorization));
+    localStorage.setItem("username", JSON.stringify(user.username));
+    navigate("/admin");
   };
 
   const isAuthenticated = () => {
@@ -66,7 +55,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("username");
     setUsername(null);
     setAuthorization(null);
-    setIsError(false);
     navigate("/");
   };
 
@@ -78,7 +66,6 @@ export const AuthProvider = ({ children }) => {
         authorization,
         handleLogin,
         handleLogout,
-        isError,
       }}
     >
       {children}

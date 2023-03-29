@@ -3,17 +3,16 @@ import { useAuth } from "../context/AuthProvider";
 import "./LoginPage.css";
 
 export const LoginPage = () => {
-  const { handleLogin, isError } = useAuth();
+  const { handleLogin } = useAuth();
   const [showErrorMsg, setShowErrorMsg] = useState(false);
 
   const onSubmit = (e) => {
-    handleLogin(e);
-    if (isError) {
+    handleLogin(e).catch(() => {
       setShowErrorMsg(true);
       setTimeout(function () {
         setShowErrorMsg(false);
       }, 3000);
-    }
+    });
   };
 
   return (
@@ -47,9 +46,7 @@ export const LoginPage = () => {
             className="LoginInput"
           />
         </div>
-        {isError && showErrorMsg && (
-          <p>&#x274C; Invalid username and/or password.</p>
-        )}
+        {showErrorMsg && <p>&#x274C; Invalid username and/or password.</p>}
       </form>
     </div>
   );
