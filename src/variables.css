@@ -1,0 +1,10 @@
+:root {
+  --primary-button-bg-color: #0095f6;
+  --primary-button-bg-color-hover: #1877f2;
+  --secondary-button-bg-color: #6c757d;
+  --primary-button-border-radius: 0.375rem;
+  --primary-input-border-radius: 0.375rem;
+  --primary-button-padding: 8px;
+  --primary-button-font-weight: 600;
+  --primary-button-font-height: 40px;
+}
