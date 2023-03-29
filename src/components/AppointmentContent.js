@@ -95,24 +95,21 @@ export const AppointmentContent = () => {
         )}
       </div>
 
-      <div>
-        {availableTimes.length > 0 && (
-          <>
-            <AppointmentTime
-              availableTimes={availableTimes}
-              selectedTime={selectedTime}
-              handleTimeButtonClick={handleTimeButtonClick}
-            />
-
-            <AppointmentForm
-              time={selectedTime}
-              date={selectedDate}
-              buildingId={selectedBuildingId}
-              buildingName={selectedBuildingName}
-            />
-          </>
-        )}
-      </div>
+      {availableTimes.length > 0 && (
+        <AppointmentTime
+          availableTimes={availableTimes}
+          selectedTime={selectedTime}
+          handleTimeButtonClick={handleTimeButtonClick}
+        />
+      )}
+      {selectedTime && (
+        <AppointmentForm
+          time={selectedTime}
+          date={selectedDate}
+          buildingId={selectedBuildingId}
+          buildingName={selectedBuildingName}
+        />
+      )}
     </div>
   );
 };
