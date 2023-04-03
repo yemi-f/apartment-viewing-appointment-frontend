@@ -91,7 +91,7 @@ export const AppointmentContent = () => {
           handleTimeButtonClick={handleTimeButtonClick}
         />
       ) : (
-        <p>No appointments available</p>
+        selectedBuildingId && <p>No appointments available</p>
       )}
       {selectedTime && (
         <AppointmentForm

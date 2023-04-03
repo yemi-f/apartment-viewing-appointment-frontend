@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthProvider";
 import { getDateToday } from "../utils";
 import { useBuildings } from "../context/BuildingsProvider";
+import "./AdminPage.css";
 
 const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
 
@@ -61,15 +62,32 @@ export const AdminPage = () => {
         ></input>
       </div>
 
-      {appointments.map(({ id, name, email, date, time, buildingId }) => {
-        return (
-          <p key={id}>
-            {name} {email} {getBuildingName(buildingId)} {date} {time}
-          </p>
-        );
-      })}
-
-      {appointments.length === 0 && (
+      {appointments.length > 0 ? (
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Building</th>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {appointments.map(({ id, name, email, date, time, buildingId }) => {
+              return (
+                <tr key={id}>
+                  <td>{date}</td>
+                  <td>{time}</td>
+                  <td>{getBuildingName(buildingId)}</td>
+                  <td>{name}</td>
+                  <td>{email}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      ) : (
         <p>There are no appointments for this day</p>
       )}
     </div>
