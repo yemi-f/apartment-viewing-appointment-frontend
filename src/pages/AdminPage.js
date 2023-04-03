@@ -14,7 +14,6 @@ export const AdminPage = () => {
 
   const onCalendarChange = (e) => {
     const newDate = e.target.value;
-    console.log(newDate);
     setSelectedDate(newDate);
   };
 
