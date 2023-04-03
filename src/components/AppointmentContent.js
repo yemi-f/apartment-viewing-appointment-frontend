@@ -3,16 +3,13 @@ import { AppointmentForm } from "./AppointmentForm";
 import "./AppointmentContent.css";
 import { AppointmentTime } from "./AppointmentTime";
 import { AppointmentCalendar } from "./AppointmentCalendar";
+import { getDateToday } from "../utils";
 
 const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
 
 export const AppointmentContent = () => {
-  const dateToday = new Date();
-  const month =
-    dateToday.getMonth() < 9
-      ? `0${dateToday.getMonth() + 1}`
-      : `${dateToday.getMonth() + 1}`;
-  const today = `${dateToday.getFullYear()}-${month}-${dateToday.getDate()}`;
+  const today = getDateToday();
+
   const [selectedDate, setSelectedDate] = useState(today);
   const [buildings, setBuildings] = useState([]);
   const [selectedBuildingId, setSelectedBuildingId] = useState("");
@@ -61,7 +58,6 @@ export const AppointmentContent = () => {
   }, [selectedBuildingId, selectedDate]);
 
   const handleTimeButtonClick = (time) => {
-    console.log(time);
     setSelectedTime(time);
   };
 
