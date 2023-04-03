@@ -4,14 +4,16 @@ import "./AppointmentContent.css";
 import { AppointmentTime } from "./AppointmentTime";
 import { AppointmentCalendar } from "./AppointmentCalendar";
 import { getDateToday } from "../utils";
+import { useBuildings } from "../context/BuildingsProvider";
 
 const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
 
 export const AppointmentContent = () => {
   const today = getDateToday();
 
+  const { buildings } = useBuildings();
+
   const [selectedDate, setSelectedDate] = useState(today);
-  const [buildings, setBuildings] = useState([]);
   const [selectedBuildingId, setSelectedBuildingId] = useState("");
   const [selectedBuildingName, setSelectedBuildingName] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
@@ -29,18 +31,11 @@ export const AppointmentContent = () => {
 
   const handleCalendarOnChange = (e) => {
     const newDate = e.target.value;
-    console.log(newDate);
     setSelectedDate(newDate);
     setSelectedTime("");
   };
 
   useEffect(() => {
-    const fetchBuildings = async () => {
-      fetch(`${apiServerUrl}/buildings`)
-        .then((response) => response.json())
-        .then((data) => setBuildings(data));
-    };
-
     const fetchAvailableTimes = async () => {
       if (!selectedBuildingId) {
         setAvailableTimes([]);
@@ -53,7 +48,6 @@ export const AppointmentContent = () => {
         .then((data) => setAvailableTimes(data));
     };
 
-    fetchBuildings();
     fetchAvailableTimes();
   }, [selectedBuildingId, selectedDate]);
 
@@ -83,7 +77,6 @@ export const AppointmentContent = () => {
 
         {selectedBuildingId && (
           <AppointmentCalendar
-            disabled={availableTimes.length < 1}
             today={today}
             selectedDate={selectedDate}
             handleCalendarOnChange={handleCalendarOnChange}
@@ -91,12 +84,14 @@ export const AppointmentContent = () => {
         )}
       </div>
 
-      {availableTimes.length > 0 && (
+      {availableTimes.length > 0 ? (
         <AppointmentTime
           availableTimes={availableTimes}
           selectedTime={selectedTime}
           handleTimeButtonClick={handleTimeButtonClick}
         />
+      ) : (
+        <p>No appointments available</p>
       )}
       {selectedTime && (
         <AppointmentForm
